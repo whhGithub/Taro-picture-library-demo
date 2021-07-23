@@ -17,6 +17,7 @@ const store = Vuex.createStore({
             const url = `https://picsum.photos/v2/list?page=${page}&limit=${limit}`
             const res = await Taro.request({ url })
             context.commit("LOAD_PICTURE_MUTATIONS", res.data)
+            console.log(context.state.pictures)
             return res.data
         }
     }

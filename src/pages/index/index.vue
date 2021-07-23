@@ -4,9 +4,9 @@
     <nut-button loading>加载中</nut-button>
   </view>
   <view v-else>
-    <view v-for="(item) in picture" :key= "item.id">
-      <img :src="`https://picsum.photos/id/${item.id}/200`">
-      {{ item.id + "-" + item.author}}
+    <view v-for="(item,index) in picture" :key= "item.id">
+      <img :src="`https://picsum.photos/id/${item.id}/200`" @click="toDetail(index)">
+      {{ index + "-" + item.author}}
     </view>
   </view>
   </view>
@@ -15,12 +15,14 @@
 <script>
 import { ref,computed,onMounted } from 'vue';
 import { useStore } from 'vuex';
+import Taro from '@tarojs/taro';
 export default {
   name: 'Index',
   components: {
    
   },
   setup(){
+   Taro.pxTransform(10)
    const store = useStore();
    const loading = ref(false);
    const page = ref(0);
@@ -35,12 +37,21 @@ export default {
         loading.value = false;
       }
    }
+   const toDetail = (id) =>{
+     if(id != null){
+       Taro.navigateTo({
+        url: `/pages/detail/index?id=${id}`
+    })
+    }
+     
+   }
    onMounted(() => {
     loadMore();
    }) 
    return {
      loading,
-     picture
+     picture,
+     toDetail
    }
   }
 }
