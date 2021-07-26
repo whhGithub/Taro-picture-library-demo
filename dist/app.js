@@ -10750,7 +10750,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var config = {"pages":["pages/index/index"],"window":{"backgroundTextStyle":"light","navigationBarBackgroundColor":"#fff","navigationBarTitleText":"WeChat","navigationBarTextStyle":"black"}};
+var config = {"pages":["pages/index/index","pages/detail/index"],"window":{"backgroundTextStyle":"light","navigationBarBackgroundColor":"#fff","navigationBarTitleText":"WeChat","navigationBarTextStyle":"black"}};
 _tarojs_runtime__WEBPACK_IMPORTED_MODULE_2__["window"].__taroAppConfig = config
 var inst = App(Object(_tarojs_runtime__WEBPACK_IMPORTED_MODULE_2__["createVue3App"])(_node_modules_babel_loader_lib_index_js_app_js__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"], vue__WEBPACK_IMPORTED_MODULE_5__[/* h */ "p"], config))
 
@@ -10796,7 +10796,9 @@ Object(_tarojs_taro__WEBPACK_IMPORTED_MODULE_3__["initPxTransform"])({
 var store = vuex__WEBPACK_IMPORTED_MODULE_2__[/* createStore */ "a"]({
   state: function state() {
     return {
-      pictures: []
+      pictures: [],
+      page: 1,
+      refreshList: []
     };
   },
   mutations: {
@@ -10813,20 +10815,21 @@ var store = vuex__WEBPACK_IMPORTED_MODULE_2__[/* createStore */ "a"]({
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 30 : _ref$limit;
+                _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 10 : _ref$limit;
+                console.log(page + "-" + limit);
                 url = "https://picsum.photos/v2/list?page=".concat(page, "&limit=").concat(limit);
-                _context.next = 4;
+                _context.next = 5;
                 return _tarojs_taro__WEBPACK_IMPORTED_MODULE_3___default.a.request({
                   url: url
                 });
 
-              case 4:
+              case 5:
                 res = _context.sent;
                 context.commit("LOAD_PICTURE_MUTATIONS", res.data);
                 console.log(context.state.pictures);
                 return _context.abrupt("return", res.data);
 
-              case 8:
+              case 9:
               case "end":
                 return _context.stop();
             }

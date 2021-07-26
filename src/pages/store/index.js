@@ -4,7 +4,9 @@ import Taro from '@tarojs/taro'
 const store = Vuex.createStore({
     state() {
         return {
-            pictures: []
+            pictures: [],
+            page: 1,
+            refreshList: []
         }
     },
     mutations: {
@@ -13,7 +15,8 @@ const store = Vuex.createStore({
         }
     },
     actions: {
-        LOAD_PICTURE_MUTATIONS: async(context, { page = 1, limit = 30 }) => {
+        LOAD_PICTURE_MUTATIONS: async(context, { page = 1, limit = 10 }) => {
+            console.log(page + "-" + limit);
             const url = `https://picsum.photos/v2/list?page=${page}&limit=${limit}`
             const res = await Taro.request({ url })
             context.commit("LOAD_PICTURE_MUTATIONS", res.data)
