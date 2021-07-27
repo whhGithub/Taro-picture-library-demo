@@ -6,21 +6,21 @@ const store = Vuex.createStore({
         return {
             pictures: [],
             page: 1,
-            refreshList: []
         }
     },
     mutations: {
         LOAD_PICTURE_MUTATIONS: (state, pictures) => {
-            state.pictures = pictures
+            state.pictures.push(pictures)
         }
     },
     actions: {
-        LOAD_PICTURE_MUTATIONS: async(context, { page = 1, limit = 10 }) => {
+        LOAD_PICTURE_MUTATIONS: async(context, { page = 1, limit = 30 }) => {
             console.log(page + "-" + limit);
             const url = `https://picsum.photos/v2/list?page=${page}&limit=${limit}`
             const res = await Taro.request({ url })
-            context.commit("LOAD_PICTURE_MUTATIONS", res.data)
-            console.log(context.state.pictures)
+            for (var i = 0; i < res.data.length; i++) {
+                context.commit("LOAD_PICTURE_MUTATIONS", res.data[i])
+            }
             return res.data
         }
     }

@@ -10797,25 +10797,24 @@ var store = vuex__WEBPACK_IMPORTED_MODULE_2__[/* createStore */ "a"]({
   state: function state() {
     return {
       pictures: [],
-      page: 1,
-      refreshList: []
+      page: 1
     };
   },
   mutations: {
     LOAD_PICTURE_MUTATIONS: function LOAD_PICTURE_MUTATIONS(state, pictures) {
-      state.pictures = pictures;
+      state.pictures.push(pictures);
     }
   },
   actions: {
     LOAD_PICTURE_MUTATIONS: function () {
       var _LOAD_PICTURE_MUTATIONS = Object(C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(context, _ref) {
-        var _ref$page, page, _ref$limit, limit, url, res;
+        var _ref$page, page, _ref$limit, limit, url, res, i;
 
         return C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 10 : _ref$limit;
+                _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 30 : _ref$limit;
                 console.log(page + "-" + limit);
                 url = "https://picsum.photos/v2/list?page=".concat(page, "&limit=").concat(limit);
                 _context.next = 5;
@@ -10825,11 +10824,14 @@ var store = vuex__WEBPACK_IMPORTED_MODULE_2__[/* createStore */ "a"]({
 
               case 5:
                 res = _context.sent;
-                context.commit("LOAD_PICTURE_MUTATIONS", res.data);
-                console.log(context.state.pictures);
+
+                for (i = 0; i < res.data.length; i++) {
+                  context.commit("LOAD_PICTURE_MUTATIONS", res.data[i]);
+                }
+
                 return _context.abrupt("return", res.data);
 
-              case 9:
+              case 8:
               case "end":
                 return _context.stop();
             }

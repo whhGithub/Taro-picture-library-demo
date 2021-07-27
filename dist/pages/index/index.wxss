@@ -1,7 +1,18 @@
-.index {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.infiniteUl {
+  height: 1200rpx;
+  width: 750rpx;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.infiniteLi {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #646464;
+  text-align: center;
+}
+.loading {
+  display: block;
+  width: 100%;
   text-align: center;
 }
 .index {

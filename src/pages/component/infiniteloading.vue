@@ -14,7 +14,7 @@
           :has-more="hasMore"
           @load-more="loadMore"
          >
-      <view class="infiniteLi" v-for="(item, index) in picture" :key="item.id">
+      <view class="infiniteLi" v-for="(item, index) in picture" :key="index">
         <img
           :src="`https://picsum.photos/id/${item.id}/200`"
           @click="toDetail(index)"
@@ -41,14 +41,14 @@ export default {
     const page = ref(1);
     const hasMore = ref(true);
     const picture = computed(() => store.state.pictures);
-    const loadMore = async () => {
+    const loadMore = async (done) => {
       setTimeout(() => {
       loading.value = true;
       console.log("触发")
       try {
         const res = store.dispatch("LOAD_PICTURE_MUTATIONS", {page : page.value});    
         page.value++;
-        console.log(page)
+        done();
       } catch (error) {
         console.log(error);
       } finally {
@@ -78,10 +78,27 @@ export default {
 </script>
 
 <style lang="scss">
-.index {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+// .index {
+//   font-family: "Avenir", Helvetica, Arial, sans-serif;
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   text-align: center;
+// }
+.infiniteUl{
+  height: 600px;
+  width: 375px;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+.infiniteLi{
+  margin-top:10px;
+  font-size: 14px;
+  color: rgba(100,100,100,1);
+  text-align: center;
+}
+.loading{
+  display: block;
+  width: 100%;
   text-align: center;
 }
 </style>

@@ -63,7 +63,7 @@ _index_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a
     });
 
     var loadMore = /*#__PURE__*/function () {
-      var _ref = Object(C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var _ref = Object(C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"])( /*#__PURE__*/C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(done) {
         return C_Users_Administrator_Desktop_demo_weapp_node_modules_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -77,7 +77,7 @@ _index_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a
                       page: page.value
                     });
                     page.value++;
-                    console.log(page);
+                    done();
                   } catch (error) {
                     console.log(error);
                   } finally {
@@ -93,7 +93,7 @@ _index_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a
         }, _callee);
       }));
 
-      return function loadMore() {
+      return function loadMore(_x) {
         return _ref.apply(this, arguments);
       };
     }();
@@ -202,7 +202,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* openBlock */ "A"])(true), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createBlock */ "g"])(vue__WEBPACK_IMPORTED_MODULE_0__[/* Fragment */ "b"], null, Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* renderList */ "C"])($setup.picture, function (item, index) {
         return Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* openBlock */ "A"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createBlock */ "g"])("view", {
           class: "infiniteLi",
-          key: item.id
+          key: index
         }, [Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("img", {
           src: "https://picsum.photos/id/".concat(item.id, "/200"),
           onClick: function onClick($event) {
