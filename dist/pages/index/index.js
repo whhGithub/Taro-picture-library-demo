@@ -130,17 +130,12 @@ _index_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @tarojs/taro */ "./node_modules/@tarojs/taro/index.js");
-/* harmony import */ var _tarojs_taro__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_tarojs_taro__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _component_infiniteloading_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../component/infiniteloading.vue */ "./src/pages/component/infiniteloading.vue");
-
-
-
+/* harmony import */ var _component_infiniteloading_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../component/infiniteloading.vue */ "./src/pages/component/infiniteloading.vue");
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   name: "Index",
   components: {
-    "component-a": _component_infiniteloading_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"]
+    "component-a": _component_infiniteloading_vue__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"]
   }
 });
 
@@ -207,10 +202,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           src: "https://picsum.photos/id/".concat(item.id, "/200"),
           onClick: function onClick($event) {
             return $setup.toDetail(index);
-          }
+          },
+          class: "resize"
         }, null, 8
         /* PROPS */
-        , ["src", "onClick"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createTextVNode */ "k"])(" " + Object(vue__WEBPACK_IMPORTED_MODULE_1__[/* toDisplayString */ "K"])(index + "-" + item.author), 1
+        , ["src", "onClick"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("view", null, Object(vue__WEBPACK_IMPORTED_MODULE_1__[/* toDisplayString */ "K"])(index + "-" + item.author), 1
         /* TEXT */
         )]);
       }), 128

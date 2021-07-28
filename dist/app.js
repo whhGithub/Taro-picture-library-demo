@@ -10814,7 +10814,7 @@ var store = vuex__WEBPACK_IMPORTED_MODULE_2__[/* createStore */ "a"]({
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 30 : _ref$limit;
+                _ref$page = _ref.page, page = _ref$page === void 0 ? 1 : _ref$page, _ref$limit = _ref.limit, limit = _ref$limit === void 0 ? 12 : _ref$limit;
                 console.log(page + "-" + limit);
                 url = "https://picsum.photos/v2/list?page=".concat(page, "&limit=").concat(limit);
                 _context.next = 5;

@@ -44,18 +44,29 @@ _index_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  name: 'detail',
+  name: "detail",
   setup: function setup() {
     var instance = _tarojs_taro__WEBPACK_IMPORTED_MODULE_2___default.a.getCurrentInstance();
     var loading = Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* ref */ "l"])(false);
     var store = Object(vuex__WEBPACK_IMPORTED_MODULE_1__[/* useStore */ "b"])();
     var picture = store.state.pictures;
     var pictureID = instance.router.params.id;
+    var pictureAuthor = instance.router.params.author;
+    console.log;
     var pictureInfo = picture[pictureID];
+
+    var GoIndex = function GoIndex() {
+      _tarojs_taro__WEBPACK_IMPORTED_MODULE_2___default.a.navigateBack({
+        delta: 2
+      });
+    };
+
     return {
       loading: loading,
       pictureInfo: pictureInfo,
-      pictureID: pictureID
+      pictureID: pictureID,
+      pictureAuthor: pictureAuthor,
+      GoIndex: GoIndex
     };
   }
 });
@@ -73,27 +84,51 @@ _index_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return render; });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
 
 var _hoisted_1 = {
   class: "detail"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_nut_cell = Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* resolveComponent */ "E"])("nut-cell");
+
   return Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* openBlock */ "A"])(), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createBlock */ "g"])("view", _hoisted_1, [Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("view", null, [Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("img", {
-    src: "https://picsum.photos/id/".concat($setup.pictureInfo.id, "/200")
+    src: "https://picsum.photos/id/".concat($setup.pictureInfo.id, "/200"),
+    class: "resize"
   }, null, 8
   /* PROPS */
-  , ["src"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("view", null, " id:" + Object(vue__WEBPACK_IMPORTED_MODULE_1__[/* toDisplayString */ "K"])($setup.pictureID), 1
-  /* TEXT */
-  ), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("view", null, " 作者:" + Object(vue__WEBPACK_IMPORTED_MODULE_1__[/* toDisplayString */ "K"])($setup.pictureInfo.author), 1
-  /* TEXT */
-  ), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("view", null, " 来自:" + Object(vue__WEBPACK_IMPORTED_MODULE_1__[/* toDisplayString */ "K"])($setup.pictureInfo.url), 1
-  /* TEXT */
-  ), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("view", null, " 宽度:" + Object(vue__WEBPACK_IMPORTED_MODULE_1__[/* toDisplayString */ "K"])($setup.pictureInfo.width), 1
-  /* TEXT */
-  ), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])("view", null, " 高度:" + Object(vue__WEBPACK_IMPORTED_MODULE_1__[/* toDisplayString */ "K"])($setup.pictureInfo.height), 1
-  /* TEXT */
-  )])]);
+  , ["src"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])(_component_nut_cell, {
+    title: "author",
+    icon: "my",
+    desc: "".concat($setup.pictureInfo.author)
+  }, null, 8
+  /* PROPS */
+  , ["desc"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])(_component_nut_cell, {
+    title: "pictureID",
+    icon: "issue",
+    desc: "".concat($setup.pictureID)
+  }, null, 8
+  /* PROPS */
+  , ["desc"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])(_component_nut_cell, {
+    title: "width",
+    icon: "date",
+    desc: "".concat($setup.pictureInfo.width)
+  }, null, 8
+  /* PROPS */
+  , ["desc"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])(_component_nut_cell, {
+    title: "height",
+    icon: "date",
+    desc: "".concat($setup.pictureInfo.height)
+  }, null, 8
+  /* PROPS */
+  , ["desc"]), Object(vue__WEBPACK_IMPORTED_MODULE_0__[/* createVNode */ "l"])(_component_nut_cell, {
+    title: "url",
+    icon: "link",
+    desc: "".concat($setup.pictureInfo.url),
+    "is-link": "",
+    onClick: $setup.GoIndex
+  }, null, 8
+  /* PROPS */
+  , ["desc", "onClick"])])]);
 }
 
 /***/ }),

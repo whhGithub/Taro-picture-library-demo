@@ -18,11 +18,13 @@
         <img
           :src="`https://picsum.photos/id/${item.id}/200`"
           @click="toDetail(index)"
+          class="resize"
         /> 
-        {{ index + "-" + item.author }}
+        <view>{{ index + "-" + item.author }}</view>
       </view>
        </nut-infiniteloading>
       </view>
+
     </view>
   </view>
 </template>
@@ -78,27 +80,29 @@ export default {
 </script>
 
 <style lang="scss">
-// .index {
-//   font-family: "Avenir", Helvetica, Arial, sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   text-align: center;
-// }
-.infiniteUl{
-  height: 600px;
-  width: 375px;
-  overflow-y:auto;
-  overflow-x:hidden;
-}
-.infiniteLi{
-  margin-top:10px;
-  font-size: 14px;
-  color: rgba(100,100,100,1);
-  text-align: center;
-}
-.loading{
-  display: block;
-  width: 100%;
-  text-align: center;
-}
+    .infiniteUl{
+      height: 600px;
+      width: 375px;
+      overflow-y:auto;
+      overflow-x:hidden;
+    }
+    .infiniteLi{
+      margin-top:10px;
+      font-size: 14px;
+      color: rgba(100,100,100,1);
+      text-align: center;
+    }
+    .loading{
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+     .resize{
+        max-width: 100%;
+        height: 300px;
+        width: 95%;
+        margin: 10px;
+        border-radius: 8px;
+        box-shadow: 0 13px 27px -5px hsl(240deg 30% 28% / 25%), 0 8px 16px -8px hsl(0deg 0% 0% / 30%), 0 -6px 16px -6px hsl(0deg 0% 0% / 3%);
+    }
 </style>

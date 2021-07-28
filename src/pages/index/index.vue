@@ -10,9 +10,6 @@
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
-import { useStore } from "vuex";
-import Taro from "@tarojs/taro";
 import ComponentA from "../component/infiniteloading.vue";
 export default {
   name: "Index",
