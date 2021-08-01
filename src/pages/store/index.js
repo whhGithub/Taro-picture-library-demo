@@ -11,6 +11,7 @@ const store = Vuex.createStore({
     mutations: {
         LOAD_PICTURE_MUTATIONS: (state, pictures) => {
             state.pictures.push(pictures)
+            console.log(state.pictures)
         }
     },
     actions: {
@@ -19,6 +20,7 @@ const store = Vuex.createStore({
             const url = `https://picsum.photos/v2/list?page=${page}&limit=${limit}`
             const res = await Taro.request({ url })
             for (var i = 0; i < res.data.length; i++) {
+                res.data[i].isCollect = false
                 context.commit("LOAD_PICTURE_MUTATIONS", res.data[i])
             }
             return res.data

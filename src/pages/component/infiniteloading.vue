@@ -24,7 +24,6 @@
       </view>
        </nut-infiniteloading>
       </view>
-
     </view>
   </view>
 </template>

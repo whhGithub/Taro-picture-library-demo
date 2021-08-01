@@ -40,6 +40,7 @@
         "@tarojs/plugin-html": "3.3.1",
         "@tarojs/runtime": "3.3.1",
         "@tarojs/taro": "3.3.1",
+        "taro-ui": "^2.3.4",
         "vue": "^3.0.0",
         "vuex": "^4.0.2"
     },

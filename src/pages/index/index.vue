@@ -11,17 +11,29 @@
 
 <script>
 import ComponentA from "../component/infiniteloading.vue";
-export default {
+import Taro from "@tarojs/taro";
+export default {   
   name: "Index",
   components: { "component-a": ComponentA },
+   setup() {
+     const switchInterface = (id) => {
+      if(id === "shoucang"){
+        Taro.switchTab({
+          url: '/collect'
+        })
+       }
+    };
+    return{
+      switchInterface
+    }
+   }
 };
 </script>
 
 <style lang="scss">
-.index {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-}
+  .content{
+    font-size: 10px;
+    width:30px;
+    height: 30px;
+  }
 </style>
