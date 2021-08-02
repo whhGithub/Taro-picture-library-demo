@@ -6,7 +6,7 @@
         class="resize"
       />
       <nut-cell title="author" icon="my" :desc = "`${pictureInfo.author}`"></nut-cell>
-      <nut-cell title="pictureID" icon="isssue" :desc = "`${pictureID}`" ></nut-cell>
+      <nut-cell title="pictureID" icon="issue" :desc = "`${pictureID}`" ></nut-cell>
       <nut-cell title="width" icon="date" :desc = "`${pictureInfo.width}`" ></nut-cell>
       <nut-cell title="height" icon="date" :desc = "`${pictureInfo.height}`" ></nut-cell>
       <nut-cell title="isCollect" icon="date" :desc = "`${pictureInfo.isCollect}`" ></nut-cell>
