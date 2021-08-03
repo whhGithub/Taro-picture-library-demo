@@ -55,6 +55,15 @@ export default {
       }
      }, 500);
     };
+    const getStoreData = ()=>{
+      let value = Taro.getStorageSync('data')
+      console.log(value)
+      if (value[0].length != 0) {
+        store.commit("loadingAll",value)
+        return true
+      }
+      return false
+    }
     const toDetail = (id) => {
       if (id != null) {
         Taro.navigateTo({
@@ -63,7 +72,10 @@ export default {
       }
     };
     onMounted(() => {
-      loadMore();
+      const isHasData = getStoreData();
+      if(isHasData === false){
+        loadMore();
+      }
     });
     return {
       loading,

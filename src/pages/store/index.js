@@ -20,17 +20,25 @@ const store = Vuex.createStore({
         },
         cancelCollect: (state, idx) => {
             state.collectPhotos.splice(idx, 1);
+        },
+        loadingAll: (state, data) => {
+            state.pictures = data[0]
+            state.collectPhotos = data[1]
+            state.page = data[2]
+            state.isHasPhotos = data[3]
+            state.photoAmount = data[4]
+            console.log(state.pictures)
         }
     },
     actions: {
         LOAD_PICTURE_MUTATIONS: async(context, { page = 1, limit = 12 }) => {
             const url = `https://picsum.photos/v2/list?page=${page}&limit=${limit}`
             const res = await Taro.request({ url })
-            console.log(store.state.photoAmount)
-            for (var i = store.state.photoAmount; i < res.data.length; i++) {
+            for (var i = 0; i < res.data.length; i++) {
                 res.data[i].isCollect = false
                 res.data[i].idx = store.state.photoAmount
-                store.state.photoAmount++;
+                store.state.photoAmount = store.state.photoAmount + 1;
+                console.log(store.state.photoAmount)
                 context.commit("LOAD_PICTURE_MUTATIONS", res.data[i])
             }
             return res.data
