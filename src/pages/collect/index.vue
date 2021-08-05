@@ -1,13 +1,6 @@
 <template>
   <view class="index">
-    <view v-if="isHasPhotos">
-      <nut-row>
-        <nut-col :span="24">
-          <nut-button loading class="collect">暂无收藏</nut-button>
-        </nut-col>
-      </nut-row>
-    </view>
-    <view v-else>
+    <view v-if="isHasCollectPhotos.length">
       <view class="infiniteUl" id="scrollDemo">
         <view class="infiniteLi" v-for="(item, index) in photos" :key="index">
           <img
@@ -28,7 +21,7 @@
               <nut-cell
                 title="pictureID"
                 icon="issue"
-                :desc="`${item.idx}`"
+                :desc="`${item.id}`"
               ></nut-cell>
               <nut-cell
                 title="width"
@@ -48,13 +41,20 @@
               <nut-button
                 shape="round"
                 type="primary"
-                @click="cancelCollect(item.idx, index)"
+                @click="cancelCollect(item.id, index)"
                 >取消收藏</nut-button
               >
             </nut-collapse-item>
           </nut-collapse>
         </view>
       </view>
+    </view>
+    <view v-else>
+      <nut-row>
+        <nut-col :span="24">
+          <nut-button loading class="collect">暂无收藏</nut-button>
+        </nut-col>
+      </nut-row>
     </view>
     <nut-notify
       @click="onClick"
@@ -67,22 +67,19 @@
 </template>
 
 <script>
-import { ref, computed, reactive, onMounted } from "vue";
+import { ref, computed, reactive } from "vue";
 import { useStore } from "vuex";
 export default {
   name: "Index",
   setup() {
     const activeName = ref(-1);
     const store = useStore();
-    const isHasPhotos = computed(() => store.state.isHasPhotos);
-    const photos = computed(() => store.state.collectPhotos);
+    const isHasCollectPhotos = computed(() => store.state.collectPhotos);
+    const photos = store.state.collectPhotos;
     const cancelCollect = (idx, id) => {
       notifyState.methods.cellClick("warning", "取消成功");
-      store.state.pictures[idx].isCollect = false;
+      store.state.pictures[store.state.pictures.findIndex((pictures) => pictures.id === idx)].isCollect = false;
       store.commit("cancelCollect", id);
-      if (store.state.collectPhotos.length == 0) {
-        store.state.isHasPhotos = true;
-      }
     };
     const notifyState = {
       state: reactive({
@@ -99,7 +96,7 @@ export default {
       },
     };
     return {
-      isHasPhotos,
+      isHasCollectPhotos,
       photos,
       activeName,
       notifyState,

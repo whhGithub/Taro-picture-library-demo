@@ -5,7 +5,7 @@
     </view>
     <view v-else>
       <view class="infiniteUl" id="scrollDemo">
-         <nut-infiniteloading
+        <nut-infiniteloading
           pull-icon="JD"
           load-txt="loading"
           load-more-txt="没有啦～"
@@ -13,16 +13,20 @@
           container-id="scrollDemo"
           :has-more="hasMore"
           @load-more="loadMore"
-         >
-      <view class="infiniteLi" v-for="(item, index) in picture" :key="index">
-        <img
-          :src="`https://picsum.photos/id/${item.id}/200`"
-          @click="toDetail(index)"
-          class="resize"
-        /> 
-        <view>{{ index + "-" + item.author }}</view>
-      </view>
-       </nut-infiniteloading>
+        >
+          <view
+            class="infiniteLi"
+            v-for="(item, index) in picture"
+            :key="index"
+          >
+            <img
+              :src="`https://picsum.photos/id/${item.id}/200`"
+              @click="toDetail(index)"
+              class="resize"
+            />
+            <view>{{ index + "-" + item.author }}</view>
+          </view>
+        </nut-infiniteloading>
       </view>
     </view>
   </view>
@@ -38,32 +42,28 @@ export default {
     Taro.pxTransform(10);
     const store = useStore();
     const loading = ref(false);
-    const page = ref(1);
+    const page = computed(() => store.state.page);
     const hasMore = ref(true);
     const picture = computed(() => store.state.pictures);
     const loadMore = async (done) => {
-      setTimeout(() => {
       loading.value = true;
-      try {
-        const res = store.dispatch("LOAD_PICTURE_MUTATIONS", {page : page.value});    
-        page.value++;
-        done();
-      } catch (error) {
-        console.log(error);
-      } finally {
-        loading.value = false;
-      }
-     }, 500);
+      store.state.page = store.state.page + 1;
+      const res = store.dispatch("LOAD_PICTURE_MUTATIONS", {
+        page: page.value,
+      });
+      loading.value = false;
+      done()
     };
-    const getStoreData = ()=>{
-      let value = Taro.getStorageSync('data')
-      console.log(value)
-      if (value[0].length != 0) {
-        store.commit("loadingAll",value)
-        return true
+    const getStoreData = () => {
+      let value = Taro.getStorageSync("data");
+      if (value.length != 0) {
+        if(store.state.pictures){
+          store.commit("loadingAll", value);
+        }
+        return true;
       }
-      return false
-    }
+      return false;
+    };
     const toDetail = (id) => {
       if (id != null) {
         Taro.navigateTo({
@@ -71,47 +71,46 @@ export default {
         });
       }
     };
-    onMounted(() => {
-      const isHasData = getStoreData();
-      if(isHasData === false){
-        loadMore();
-      }
+    onMounted(async () => {
+      loadMore();
+      await getStoreData();
     });
     return {
       loading,
       picture,
       toDetail,
       loadMore,
-      hasMore
+      hasMore,
     };
   },
 };
 </script>
 
 <style lang="scss">
-    .infiniteUl{
-      height: 600px;
-      width: 375px;
-      overflow-y:auto;
-      overflow-x:hidden;
-    }
-    .infiniteLi{
-      margin-top:10px;
-      font-size: 14px;
-      color: rgba(100,100,100,1);
-      text-align: center;
-    }
-    .loading{
-      display: block;
-      width: 100%;
-      text-align: center;
-    }
-     .resize{
-        max-width: 100%;
-        height: 300px;
-        width: 95%;
-        margin: 10px;
-        border-radius: 8px;
-        box-shadow: 0 13px 27px -5px hsl(240deg 30% 28% / 25%), 0 8px 16px -8px hsl(0deg 0% 0% / 30%), 0 -6px 16px -6px hsl(0deg 0% 0% / 3%);
-    }
+.infiniteUl {
+  height: 600px;
+  width: 375px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.infiniteLi {
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgba(100, 100, 100, 1);
+  text-align: center;
+}
+.loading {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+.resize {
+  max-width: 100%;
+  height: 300px;
+  width: 95%;
+  margin: 10px;
+  border-radius: 8px;
+  box-shadow: 0 13px 27px -5px hsl(240deg 30% 28% / 25%),
+    0 8px 16px -8px hsl(0deg 0% 0% / 30%), 0 -6px 16px -6px hsl(0deg 0% 0% / 3%);
+}
 </style>

@@ -6,9 +6,7 @@ const store = Vuex.createStore({
         return {
             pictures: [],
             collectPhotos: [],
-            page: 1,
-            isHasPhotos: true,
-            photoAmount: 0
+            page: 0,
         }
     },
     mutations: {
@@ -22,12 +20,7 @@ const store = Vuex.createStore({
             state.collectPhotos.splice(idx, 1);
         },
         loadingAll: (state, data) => {
-            state.pictures = data[0]
-            state.collectPhotos = data[1]
-            state.page = data[2]
-            state.isHasPhotos = data[3]
-            state.photoAmount = data[4]
-            console.log(state.pictures)
+            state.collectPhotos = data
         }
     },
     actions: {
@@ -36,10 +29,12 @@ const store = Vuex.createStore({
             const res = await Taro.request({ url })
             for (var i = 0; i < res.data.length; i++) {
                 res.data[i].isCollect = false
-                res.data[i].idx = store.state.photoAmount
-                store.state.photoAmount = store.state.photoAmount + 1;
-                console.log(store.state.photoAmount)
                 context.commit("LOAD_PICTURE_MUTATIONS", res.data[i])
+            }
+            for (var i = 0; i < store.state.collectPhotos.length; i++) {
+                if (store.state.pictures.findIndex((item) => item.id === store.state.collectPhotos[i].id) != -1) {
+                    store.state.pictures[store.state.pictures.findIndex((pictures) => pictures.id === store.state.collectPhotos[i].id)].isCollect = store.state.collectPhotos[i].isCollect
+                }
             }
             return res.data
         }
