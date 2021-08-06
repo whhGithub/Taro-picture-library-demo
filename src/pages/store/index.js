@@ -16,11 +16,17 @@ const store = Vuex.createStore({
         toCollect: (state, pictures) => {
             state.collectPhotos.push(pictures)
         },
-        cancelCollect: (state, idx) => {
-            state.collectPhotos.splice(idx, 1);
+        cancelCollect: (state, id) => {
+            // state.collectPhotos.splice(id, 1);
+            state.collectPhotos.some((item, i) => {
+                if (item.id == id) {
+                    state.collectPhotos.splice(i, 1)
+                    return true
+                }
+            })
         },
         loadingAll: (state, data) => {
-            state.collectPhotos = data
+            state.collectPhotos = data　　
         }
     },
     actions: {

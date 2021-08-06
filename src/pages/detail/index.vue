@@ -12,7 +12,7 @@
       <nut-cell title="isCollect" icon="date" :desc = "`${pictureInfo.isCollect}`" ></nut-cell>
       <nut-cell title="url" icon="link" :desc = "`${pictureInfo.url}`" is-link @click="GoIndex"></nut-cell>
       <nut-notify @click="onClick" @closed="onClosed" :type="notifyState.state.type" v-model:visible="notifyState.state.show" :msg="notifyState.state.desc" />
-      <nut-button shape="round" type="primary" @click="collect" :icon="isCollecting">收藏</nut-button>
+      <nut-button shape="round" type="primary" @click="collect(pictureInfo.id)" :icon="isCollecting">收藏</nut-button>
     </view>
   </view>
 </template>
@@ -44,13 +44,20 @@ export default {
         isCollecting.value = "star-fill"
       }
     });
-    const collect = () =>{
+    const collect = (idx) =>{
       if(pictureInfo.isCollect == false){
          isCollecting.value = "star-fill";
          notifyState.methods.cellClick('success','收藏成功');
          store.state.isHasPhotos = false
          pictureInfo.isCollect = true
          store.commit("toCollect",pictureInfo)
+      }else if(pictureInfo.isCollect == true){
+        isCollecting.value = "star";
+        notifyState.methods.cellClick("warning", "取消成功");
+        store.state.pictures[
+        store.state.pictures.findIndex((pictures) => pictures.id === idx)
+      ].isCollect = false;
+      store.commit("cancelCollect", idx);
       }
     }
     const notifyState = {

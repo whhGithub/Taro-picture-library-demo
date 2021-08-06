@@ -41,7 +41,7 @@
               <nut-button
                 shape="round"
                 type="primary"
-                @click="cancelCollect(item.id, index)"
+                @click="cancelCollect(item.id,item.author)"
                 >取消收藏</nut-button
               >
             </nut-collapse-item>
@@ -56,13 +56,7 @@
         </nut-col>
       </nut-row>
     </view>
-    <nut-notify
-      @click="onClick"
-      @closed="onClosed"
-      :type="notifyState.state.type"
-      v-model:visible="notifyState.state.show"
-      :msg="notifyState.state.desc"
-    />
+    <nut-toast :msg="page.state.msg" v-model:visible="page.state.show" :type="page.state.type" @closed="page.methods.onClosed" :cover="page.state.cover" />
   </view>
 </template>
 
@@ -76,30 +70,35 @@ export default {
     const store = useStore();
     const isHasCollectPhotos = computed(() => store.state.collectPhotos);
     const photos = store.state.collectPhotos;
-    const cancelCollect = (idx, id) => {
-      notifyState.methods.cellClick("warning", "取消成功");
-      store.state.pictures[store.state.pictures.findIndex((pictures) => pictures.id === idx)].isCollect = false;
-      store.commit("cancelCollect", id);
+    const cancelCollect = (idx,author) => {
+      page.methods.openToast('success',`成功取消对${author}的作品的收藏`)
+      store.state.pictures[
+        store.state.pictures.findIndex((pictures) => pictures.id === idx)
+      ].isCollect = false;
+      store.commit("cancelCollect", idx);
     };
-    const notifyState = {
+    const page = {
       state: reactive({
+        msg: 'toast',
+        type: 'text',
         show: false,
-        desc: "",
-        type: "primary",
+        cover: false
       }),
       methods: {
-        cellClick(type, desc) {
-          notifyState.state.show = true;
-          notifyState.state.type = type;
-          notifyState.state.desc = desc;
+        openToast: (type, msg, cover = false) => {
+          page.state.show = true;
+          page.state.msg = msg;
+          page.state.type = type;
+          page.state.cover = cover;
         },
-      },
+        onClosed: () => console.log('closed')
+      }
     };
     return {
       isHasCollectPhotos,
       photos,
       activeName,
-      notifyState,
+      page,
       cancelCollect,
     };
   },
