@@ -1,4 +1,4 @@
-## Taro-picsum-demo 
+## Taro-picture-library-demo
 
 1. A taro-based picture library weapp
 2. Its picture comes from https://picsum.photos/
